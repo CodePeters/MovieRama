@@ -34,6 +34,10 @@ export class MainComponent {
     return false;
   }
 
+  public getUser() {
+    return this._authenticationService.currentUserObject()?.user.username;
+  }
+
   changeSelected(i:number, b: boolean) {
     this.movie_list[i].selected = b;
   }

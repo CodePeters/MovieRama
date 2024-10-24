@@ -48,21 +48,20 @@ export class ProfileComponent {
     console.log( this.userobj);
   }
 
+  public getUser() {
+    return this._authenticationService.currentUserObject()?.user.username;
+  }
 
-
-
-private _subscribeToUserChanges(): void {
-  this.currentUser$.subscribe((user: User | null) => this.userobj = user)
-}
+  private _subscribeToUserChanges(): void {
+    this.currentUser$.subscribe((user: User | null) => this.userobj = user)
+  }
   
-
   public is_authenticated(){
     if(this._authenticationService.currentUserToken())
       return true;
     this._router.navigate(['login']);
     return false;
   }
-
 
   public getProfileMovies(): void {
 

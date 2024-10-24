@@ -47,7 +47,6 @@ export class LoginComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   openSnackBar(msg: string) {
     this._snackBar.open(msg, undefined, {
-      // this._snackBar.open(msg, 'Ok', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: 3000,
@@ -64,10 +63,11 @@ export class LoginComponent {
       next: (response: User) => {
         // If successful, store the user and redirect to the previous page
         this._authenticationService.login(response);
-        this.openSnackBar("Login Successful!")
+        this.openSnackBar("Login Successful 🎉!")
         this._router.navigateByUrl(this._activatedRoute.snapshot.queryParams['returnUrl'] || '/');
       },
       error: (err: HttpErrorResponse) => {
+        this.openSnackBar("Login Failed!")
         console.log(err)
       }
 

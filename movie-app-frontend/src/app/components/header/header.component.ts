@@ -42,7 +42,7 @@ export class HeaderComponent {
   }
 
   private _loadCurrentUser(): void {
-    if (this._authenticationService.currentToken$) {
+    if (this._authenticationService.currentUserToken()!=='') {
       this._userService.getCurrentUser().subscribe((response: User) => {
         this._authenticationService.login(response);
       });
@@ -50,6 +50,7 @@ export class HeaderComponent {
   }
 
   private _setMenuItems(token: string | null): void {
+    // this._loadCurrentUser();
     if (token) {
       this.show_login_button = false;
     } else {

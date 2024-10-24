@@ -23,8 +23,12 @@
                     <mat-card-content class="card-content-1">
                         <div class="card-content" style="margin-top:-30px" >
                             <a style = "display: block;  color: #bbb; font-size: 0.8rem;"> 
-                                <i>by: </i> 
-                                <b><a class="custom-user" href="profile/{{movie.user?.username}}" >{{movie.user?.username}}</a></b>
+                                <i><mat-icon style="font-size:30px; margin-bottom: -2px; margin-right: 2px;">person</mat-icon> </i> 
+                                <b><a class="custom-user" href="profile/{{movie.user?.username}}" >{{movie.user?.username}}
+                                    @if(getUser()===movie.user?.username){
+                                        <a>(you)</a>
+                                    }
+                                </a></b>
                             </a>
                             <span class="date-span">
                                <i>Created on:</i> {{movie.date}}
@@ -40,7 +44,11 @@
                         {{movie.description}}
                     </mat-card-content>
                     <mat-card-actions class="card-footer" >
+                        @if(getUser()===movie.user?.username){
+                            <mat-icon style="font-size:20px; margin-bottom: -10px; margin-right: -2px; color:whitesmoke"  matTooltip="You can't vote your own movies">info</mat-icon>
+                        }
                         <div style="margin-left: auto;">
+           
                             <button  mat-button class="custom-button" (click)="like(movie)" [disabled]="disableLikeButton(movie.user?.username, movie.review)">
                                 <mat-icon style="margin-right:3px;"  [ngStyle]="{'color': getLikeColor(movie.review) }" >thumb_up</mat-icon> {{movie.likes}}
                             </button>

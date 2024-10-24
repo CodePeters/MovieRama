@@ -61,7 +61,7 @@ export class RegisterUserComponent {
     this._userService.registerUser(payload).subscribe({
       next: (response: void) => {
         // If successful, store the user and redirect to the previous page
-        this.openSnackBar("Registration Successful!, Redirecting to login..")
+        this.openSnackBar("Registration Successful 🎉!, Redirecting to login..")
         this._router.navigateByUrl(this._activatedRoute.snapshot.queryParams['returnUrl'] || '/login');
       },
       error: (err: HttpErrorResponse) => {

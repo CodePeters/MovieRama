@@ -26,6 +26,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatInputModule} from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule} from '@angular/material/tooltip';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from "@angular/common/http";
@@ -58,7 +59,8 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatList,
     MatChipsModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [
     provideAnimationsAsync(),
