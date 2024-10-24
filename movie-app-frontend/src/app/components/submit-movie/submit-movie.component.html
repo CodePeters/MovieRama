@@ -1,0 +1,33 @@
+<mat-card>
+    <mat-card-title>Submit movie</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="mainForm" (ngSubmit)="submit()">
+            <mat-form-field appearance="outline" color="primary">
+                <mat-label>Title</mat-label>
+                <input matInput id="title" type="text" formControlName="title" >
+                <mat-icon matSuffix color="primary">title</mat-icon>
+                <mat-error *ngIf="mainForm.hasError('required','title')">
+                    Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" color="accent" style="margin-bottom: -20px; ">
+                <mat-label>Description</mat-label>
+                <textarea matInput id="description" type="text" formControlName="description" value="Description"  
+                    cdkTextareaAutosize cdkAutosizeMinRows="7" cdkAutosizeMaxRows="9" placeholder="Please type a movie description">
+                </textarea>
+                <mat-error *ngIf="mainForm.hasError('maxlength','message') && !mainForm.hasError('required','message')">
+                    Please enter at most 4000 characters
+                </mat-error>
+                <mat-error *ngIf="mainForm.hasError('required','message')">
+                    Description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-hint id="hint">
+                {{mainForm.value.description?.length}}/{{messageMaxLength}}
+            </mat-hint>
+            <div class="button">
+                <button [disabled]="mainForm.invalid" type="submit" mat-button>Submit</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

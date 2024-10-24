@@ -1,0 +1,80 @@
+<!-- <h1 >Home</h1> -->
+<div *ngIf="is_authenticated()">
+    <div class="custom-user-data">
+        @if(userobj?.user?.username==username){
+            <h3>Your profile data:</h3>
+        } @else{  
+            <h3>User: {{username}}</h3> 
+        }
+    </div>
+    <div class="user-data-content">
+        @if(userobj?.user?.username==username){
+            <span class="user-data-container">
+                <p style="margin-right: 20px;">Username: {{username}}</p>
+                <p style="margin-right: 20px;">Id: {{userobj?.user?.id}}</p>
+                <p>Email: {{userobj?.user?.email}}</p>
+            </span>
+        }
+    </div>
+    <div class="user-movies">
+        <h4>Uploaded movies:</h4> 
+    </div>
+    
+    <div class="sorting">
+        <table matSort (matSortChange)="sortData($event)">
+            <tr>
+                <button mat-button style="color:whitesmoke;">
+                    <th mat-sort-header="likes">Sort by Likes</th>
+                </button>
+                <button mat-button  style="color:whitesmoke;">
+                    <th mat-sort-header="hates">Sort by Hates </th>
+                </button>
+            </tr>
+        </table>
+    </div>
+    <div class="list-container">
+        <mat-list class="list-mat" style="height: 45vh;">
+            @for (movie of movie_list; track movie.id; let idx = $index) {
+                <mat-card class="example-card" (mouseenter)="changeSelected(idx, true)" (mouseleave)="changeSelected(idx, false)">
+                    <mat-card-header style=" display: flex; justify-content: center; align-items: center;">
+                        <mat-chip-option [selected]="movie.selected" color="primary">
+                            <mat-card-title>{{movie.title}}</mat-card-title>
+                        </mat-chip-option>
+                    </mat-card-header>
+                    <mat-card-content class="card-content-1">
+                        <div class="card-content" style="margin-top:-30px" >
+                            <a style = "display: block;  color: #bbb; font-size: 0.8rem;"> 
+                                <i>by: </i> 
+                                <b><a class="custom-user" href="profile/{{movie.user?.username}}" >{{movie.user?.username}}</a></b>
+                            </a>
+                            <span class="date-span">
+                               <i>Created on:</i> {{movie.date}}
+                            </span>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-header class="custom-card-header">
+                        <mat-chip  class="custom-chip">
+                            Description
+                          </mat-chip>
+                    </mat-card-header>
+                    <mat-card-content class="custom-card-content">
+                        {{movie.description}}
+                    </mat-card-content>
+                    <mat-card-actions class="card-footer" >
+                        <div style="margin-left: auto;">
+                            <button  mat-button class="custom-button" (click)="like(movie)" [disabled]="disableLikeButton(movie.user?.username, movie.review)">
+                                <mat-icon style="margin-right:3px;"  [ngStyle]="{'color': getLikeColor(movie.review) }" >thumb_up</mat-icon> {{movie.likes}}
+                            </button>
+                            <button mat-button class="custom-button" (click)="hate(movie)" [disabled]="disableHateButton(movie.user?.username, movie.review)">
+                                <mat-icon style="margin-right:3px;" [ngStyle]="{'color': getHateColor(movie.review) }" >thumb_down</mat-icon> {{movie.hates}}
+                            </button>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+            }
+            @empty {
+                <li>There are no items.</li>
+            }
+        </mat-list>
+    </div>   
+</div>

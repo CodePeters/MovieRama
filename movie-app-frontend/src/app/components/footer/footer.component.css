@@ -1,0 +1,64 @@
+footer{
+  background-color: #003737;
+  line-height: 2.5;
+  position:fixed;
+  bottom:0px;
+  width: 100%;
+}
+
+.custom-svg{
+  height: 2vh !important;
+
+}
+
+.circle-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 8px; 
+  transition: 1s ease-out; 
+}
+
+.circle-link:hover {
+  transform: translateY(-0.25rem);
+}
+
+.subFT{
+  height: 10vh !important;
+  color: #bbb;
+  width: 100%
+}
+
+.sig-by{
+  font-style: oblique; 
+  color:black;
+  margin-right: 10px;
+}
+
+.sig{
+  height: 6vh;  
+}
+
+.ft-legal {
+  height: 4vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #002422;
+  color: gray;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1vh;
+  height: 3.5vh ;
+}
+
+.card-container-sig {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

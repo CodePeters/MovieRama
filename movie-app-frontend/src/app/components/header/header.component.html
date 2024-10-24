@@ -1,0 +1,52 @@
+<mat-toolbar id="toolbar">
+  <button mat-icon-button id="icon-button" [matMenuTriggerFor]="menu" aria-label="icon-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" class="customize">
+    <button mat-menu-item routerLink="/">
+      <mat-icon>home</mat-icon>
+      Home
+    </button>
+    @if(show_login_button) {
+      <button  mat-menu-item routerLink="/login">
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
+    }@else{
+      <button  (click)="logout()" mat-menu-item >
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+      <button mat-menu-item routerLink="/submit_movie">
+        <mat-icon>upload_file</mat-icon>
+        Upload Movie
+      </button>
+      <button mat-menu-item  routerLink="/profile/{{username}}">
+        <mat-icon>person</mat-icon>
+        Profile
+      </button>
+    }
+  </mat-menu>
+  <div class="logo-container">
+    <span>
+      <img @flyInOut src="logo.png" id="logo" alt="My image" loading="lazy">
+    </span>
+    <span @flyOutIN  id="title">
+      ovieRama
+    </span>
+  </div> 
+  <div class="buttons">
+    @if(show_login_button) {
+      <button mat-stroked-button routerLink="/login" style="margin-right:5px;" >
+        <span>Login</span>
+      </button>
+      <button mat-stroked-button routerLink="/register" style="margin-right:5px;" >
+        <span>Register</span>
+      </button>
+    }@else{
+      <button mat-stroked-button (click)="logout()" style="margin-right:5px;" >
+        <span>Logout</span>
+      </button>
+    }
+  </div>
+</mat-toolbar>

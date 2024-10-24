@@ -1,0 +1,113 @@
+:host {
+    background-blend-mode: lighten;
+    mask-image: linear-gradient(rgb(0, 0, 0) 97%, transparent);
+    height: 77vh;
+    width: 100vh; 
+}
+
+.example-card {
+    width: 80vh;
+    min-height:20vh;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    mask-image: linear-gradient(rgb(0, 0, 0) 98%, transparent);
+    background: radial-gradient(circle at 95% 10%, #00cef2, transparent 40%),
+        radial-gradient(circle at 45% 10%, #9100f294, transparent 50%), radial-gradient(circle at 55% 85%, #ffffffbf, transparent 40%),
+        radial-gradient(circle at 5% 5%, #00e9b3bb, transparent 40%), linear-gradient(65deg, #602cfe, rgb(23, 105, 187) 50%);
+}
+
+.card-footer {
+    margin: 0px 0px;
+    padding: 0px 0px;;
+    position: relative;
+}
+
+.card-buttons{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.sorting{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 2%;
+    padding: 5px 5px;
+}
+
+.list-container{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    overflow: auto; 
+}
+
+.card-content{
+    padding: 10px 10px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1rem;
+    border: double;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: #602cfe60;
+}
+
+.custom-chip{
+    border-width: 3px;
+    border-radius: 14px;
+    background-color: rgb(0, 117, 242) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bbb;
+    font-size: 0.8rem;
+    height: 2.4vh;
+}
+
+.custom-card-content{
+    flex-grow: 1; 
+    overflow: auto; 
+    border-radius: 14px;
+    padding-top: 12px;
+    min-height: 12vh;
+    background-color: rgba(1, 140, 147, 0.608); color: whitesmoke;    
+    mask-image: linear-gradient(rgb(0, 0, 0) 98%, transparent);
+}
+
+.custom-card-header{
+    margin-bottom: -12px; 
+    z-index: 1; 
+    padding:0px 0px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.custom-button{
+    width: 57px!important;
+    min-width: unset!important;
+}
+
+.card-content-1{
+    display: block;
+    position: relative;
+    font-weight: 300;
+}
+.date-span{
+    margin-top:5px; 
+    color: #bbb; 
+    font-size: .8rem;
+    display: block;
+}
+
+.custom-user{
+    font-size: 1rem;
+    margin-left: 2px;
+}
