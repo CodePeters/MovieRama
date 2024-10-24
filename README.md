@@ -14,13 +14,13 @@ A Movie Platform (2024)
 After git clone `cd` to the cloned repo: `cd ./MovieRama`
 
 * Build Backend:
-- cd `cd ./MovieRama-backend`
+- `cd ./MovieRama-backend`
 - `python3 -m venv env`
 - `source env/bin/activate`
 - `pip install djangorestframework`
 - `pip install django-cors-headers`
-- `python manage.py createsuperuser --username admin --email <sample_email_here>`
 - `python manage.py migrate`
+- `python manage.py createsuperuser --username admin --email <sample_email_here>`
 - `python manage.py runserver`
 
 Now the backend should be up and running!
@@ -42,4 +42,4 @@ Due to luck of time this project does not include:
 - Pagination would be nice to have (ideally woulbe be done on the backend and requires frontend handling as well)
 
 
-** I have also included a png file with a scalable system design using serverless architecture
+* I have also included a png file with a scalable system design using serverless architecture
