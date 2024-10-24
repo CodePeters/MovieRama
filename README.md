@@ -41,5 +41,6 @@ Due to luck of time this project does not include:
 - Unit tests
 - Pagination would be nice to have (ideally woulbe be done on the backend and requires frontend handling as well)
 
+##
 
-* I have also included a png file with a scalable system design using serverless architecture
+### I have also included a png file with a scalable system design using serverless architecture
