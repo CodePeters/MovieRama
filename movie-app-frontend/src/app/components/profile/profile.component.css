@@ -22,6 +22,11 @@
 
 }
 
+.example-card:hover{
+    transition: 1s;  
+    box-shadow:  3px -3px 5px #002422, 3px -3px 5px #002422, 3px 3px 5px #002422, -3px 3px 5px #002422,-3px -3px 5px #002422;
+}
+
 .card-footer {
     margin: 0px 0px;
     padding: 0px 0px;;

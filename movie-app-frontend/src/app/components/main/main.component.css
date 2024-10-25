@@ -19,7 +19,11 @@
     border-radius: 15px;
     border-color: rgb(39, 39, 39);
     border-width: 1px;
+}
 
+.example-card:hover{
+    transition: 1s;  
+    box-shadow:  3px -3px 5px #002422, 3px -3px 5px #002422, 3px 3px 5px #002422, -3px 3px 5px #002422,-3px -3px 5px #002422;
 }
 
 .card-footer {

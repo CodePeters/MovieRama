@@ -37,10 +37,10 @@
         <mat-list class="list-mat" style="height: 45vh;">
             @for (movie of movie_list; track movie.id; let idx = $index) {
                 <mat-card class="example-card" (mouseenter)="changeSelected(idx, true)" (mouseleave)="changeSelected(idx, false)">
-                    <mat-card-header style=" display: flex; justify-content: center; align-items: center;">
-                        <mat-chip-option [selected]="movie.selected" color="primary">
-                            <mat-card-title>{{movie.title}}</mat-card-title>
-                        </mat-chip-option>
+                    <mat-card-header style=" display: flex; flex-grow: 1; justify-content: center; align-items: center;">
+                        <!-- <mat-chip-option [selected]="movie.selected" color="primary"> -->
+                            <mat-card-title style="padding-bottom: 5px; color:whitesmoke; font-family:Roboto; font-size: 40px;">{{movie.title}}</mat-card-title>
+                        <!-- </mat-chip-option> -->
                     </mat-card-header>
                     <mat-card-content class="card-content-1">
                         <div class="card-content" style="margin-top:-30px" >
