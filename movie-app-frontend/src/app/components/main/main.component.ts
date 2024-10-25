@@ -8,6 +8,31 @@ import { MovieService } from '../../services/movie.service';
 import { HttpErrorResponse } from "@angular/common/http";
 import { ReviewService } from '../../services/review.service';
 import { ReviewPayload } from '../../shared/review_submit.model';
+import { AiService } from '../../services/ai.service';
+import { inject, Input } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+	selector: 'ngbd-modal-content',
+	standalone: true,
+	template: `
+		<div class="modal-header">
+			<h4 class="modal-title">AI Movie Summary</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<p>{{ summary }}</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
+		</div>
+	`,
+})
+export class NgbdModalContent {
+	activeModal = inject(NgbActiveModal);
+
+	@Input() summary: string='';
+}
 
 @Component({
   selector: 'app-main',
@@ -22,7 +47,9 @@ export class MainComponent {
     private readonly _authenticationService: AuthService,
     private readonly _movieService: MovieService,
     private readonly _reviewService: ReviewService,
+    private readonly _aiService: AiService,
     private router:Router,
+
   ) {
     this.loadMovies();
   }
@@ -136,5 +163,22 @@ export class MainComponent {
     let current_user = this._authenticationService.currentUserObject()?.user.username;
     return this._movieService.disableHateButton(current_user, movie_username, review)
   }
+
+  private modalService = inject(NgbModal);
+  // public loading = false;
+	open(movie: Movie) {
+    movie.loading=true;
+    this._aiService.getSummary(movie.title).subscribe({  
+      next: (response ) => {
+        const modalRef = this.modalService.open(NgbdModalContent);
+        modalRef.componentInstance.summary = response.response;
+        movie.loading=false;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err)
+      }
+    });
+
+	}
 
 }

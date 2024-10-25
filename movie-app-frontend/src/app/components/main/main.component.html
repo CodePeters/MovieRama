@@ -22,7 +22,7 @@
                     </mat-card-header>
                     <mat-card-content class="card-content-1">
                         <div class="card-content" style="margin-top:-30px" >
-                            <a style = "display: block;  color: #bbb; font-size: 0.8rem;"> 
+                            <a style = "display: block;  color: white; font-size: 0.8rem;"> 
                                 <i><mat-icon style="font-size:30px; margin-bottom: -2px; margin-right: 2px;">person</mat-icon> </i> 
                                 <b><a class="custom-user" href="profile/{{movie.user?.username}}" >{{movie.user?.username}}
                                     @if(getUser()===movie.user?.username){
@@ -34,6 +34,14 @@
                                <i>Created on:</i> {{movie.date}}
                             </span>
                         </div>
+                        <div style="margin-top:-30px; margin-left: auto;" >
+                              <button class="btn btn-lg btn-outline-primary" matTooltip="This functionality gathers the Movie title and tries to provide a summary of the movie. The more precise the title the better the answer!" 
+                              style="color: white" (click)="open(movie)">
+                                <mat-icon style="margin-bottom: -4px;">live_help</mat-icon>
+                                Ask AI
+                              </button>
+                        </div>
+
                     </mat-card-content>
                     <mat-card-header class="custom-card-header">
                         <mat-chip  class="custom-chip">
@@ -47,6 +55,7 @@
                         @if(getUser()===movie.user?.username){
                             <mat-icon style="font-size:20px; margin-bottom: -10px; margin-right: -2px; color:whitesmoke"  matTooltip="You can't vote your own movies">info</mat-icon>
                         }
+                        @if(movie.loading){<mat-spinner style="margin-bottom: -8px;" diameter="20"></mat-spinner>}
                         <div style="margin-left: auto;">
            
                             <button  mat-button class="custom-button" (click)="like(movie)" [disabled]="disableLikeButton(movie.user?.username, movie.review)">

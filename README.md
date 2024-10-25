@@ -9,6 +9,7 @@ A Movie Platform (2024)
 * SQLite3
 * Angular 18
 * Angular Material
+* Cloudflare worker (serverless)
 
 ## _Installation__
 After git clone `cd` to the cloned repo: `cd ./MovieRama`
@@ -33,14 +34,19 @@ Now the backend should be up and running!
 Everything at this point should is up and running !!!
 App is served in `http://localhost:4200/`
 
-Log is generated in `./MovieRama-backend` folder.
+The project also uses a serveless component for a feature, that is deployed in cloudflare and the worker code in in wrangler project  folder, no setup is required.
+
+Logs are generated in `./MovieRama-backend` folder.
 
 
 Due to luck of time this project does not include:
 - Sorting requirement is covered in frontend which we know is not ideal (but simpler)
-- Unit tests
 - Pagination would be nice to have (ideally woulbe be done on the backend and requires frontend handling as well)
-
+- Unit tests
+- Comments in code and documentation
+- scaled db (not just an sqlite)
+ ... as you can see the list of improvements is not exhaustive 🙂
+Just mentioning those as in a real production project these would not be best practises if the app was scaling.
 ##
 
 ### I have also included a png file with a scalable system design using serverless architecture

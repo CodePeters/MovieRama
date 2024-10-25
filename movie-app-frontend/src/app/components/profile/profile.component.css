@@ -61,15 +61,8 @@
 }
 
 .custom-chip{
-    border-width: 3px;
-    border-radius: 14px;
     background-color: rgb(0, 117, 242) !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #bbb;
-    font-size: 0.8rem;
-    height: 2.4vh;
+    height: 2.2vh;
 }
 
 .custom-card-content{
@@ -83,7 +76,7 @@
 }
 
 .custom-card-header{
-    margin-bottom: -12px; 
+    margin-bottom: -10px; 
     z-index: 1; 
     padding:0px 0px; 
     display: flex; 

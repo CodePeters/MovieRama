@@ -12,7 +12,7 @@
     margin-bottom: 10px;
     mask-image: linear-gradient(rgb(0, 0, 0) 98%, transparent);
     background: radial-gradient(circle at 95% 10%, #00cef2, transparent 40%),
-        radial-gradient(circle at 45% 10%, #9100f294, transparent 50%), radial-gradient(circle at 55% 85%, #ffffffbf, transparent 40%),
+        radial-gradient(circle at 45% 10%, #9100f294, transparent 50%), radial-gradient(circle at 55% 85%, #ffffffac, transparent 40%),
         radial-gradient(circle at 5% 5%, #00e9b3bb, transparent 40%), linear-gradient(65deg, #602cfe, rgb(23, 105, 187) 50%);
 }
 
@@ -48,27 +48,9 @@
     overflow: auto; 
 }
 
-.card-content{
-    padding: 10px 10px;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 1rem;
-    border: double;
-    border-radius: 20px;
-    border-width: 3px;
-    border-color: #602cfe60;
-}
-
 .custom-chip{
-    border-width: 3px;
-    border-radius: 14px;
     background-color: rgb(0, 117, 242) !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #bbb;
-    font-size: 0.8rem;
-    height: 2.4vh;
+    height: 2.2vh;
 }
 
 .custom-card-content{
@@ -82,7 +64,7 @@
 }
 
 .custom-card-header{
-    margin-bottom: -12px; 
+    margin-bottom: -10px; 
     z-index: 1; 
     padding:0px 0px; 
     display: flex; 
@@ -96,10 +78,25 @@
 }
 
 .card-content-1{
-    display: block;
+    /* display: block; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     font-weight: 300;
 }
+
+.card-content{
+    padding: 10px 10px;
+    /* display: inline-block; */
+    /* vertical-align: middle; */
+    line-height: 1rem;
+    border: double;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: #602cfe60;
+}
+
 .date-span{
     margin-top:5px; 
     color: #bbb; 

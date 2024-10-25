@@ -12,6 +12,7 @@ export interface Movie {
     } | null
     review: string | null;
     selected?: boolean;
+    loading?: boolean | null;
 }
 
 export interface ProfileMovies {

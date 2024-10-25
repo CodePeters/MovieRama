@@ -30,7 +30,8 @@ import { MatTooltipModule} from '@angular/material/tooltip';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from "@angular/common/http";
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     ProfileComponent,
     RegisterUserComponent,
-    SubmitMovieComponent
+    SubmitMovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,9 @@ import { CommonModule } from '@angular/common';
     MatList,
     MatChipsModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgbModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     provideAnimationsAsync(),

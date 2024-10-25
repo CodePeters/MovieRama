@@ -13,6 +13,24 @@ export class InterceptorService {
     private readonly _authService: AuthService
   ) { }
 
+  public get_with_provided_url(url: string, queryOptions: any = {}): Observable<any> {
+    const options = {
+      ...queryOptions,
+      headers: new HttpHeaders(
+        {
+          // 'Content-Type': 'application/json',
+          // 'Accept': 'application/json',
+          // 'Access-Control-Allow-Headers': 'Content-Type',
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "Content-Type, access-control-allow-headers, access-control-allow-methods, access-control-allow-origin"
+        }
+      )
+    }
+
+    return this._httpClient.get(url, options);
+  }
+
   public get(url: string, queryOptions: any = {}): Observable<any> {
     const options = {
       ...queryOptions,
