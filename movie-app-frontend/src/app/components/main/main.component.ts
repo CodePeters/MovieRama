@@ -16,14 +16,14 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 	selector: 'ngbd-modal-content',
 	standalone: true,
 	template: `
-		<div class="modal-header">
+		<div class="modal-header" style="background-color: rgb(39, 39, 39);      color: white;  ">
 			<h4 class="modal-title">AI Movie Summary</h4>
 			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 		</div>
-		<div class="modal-body">
+		<div class="modal-body"  style="background-color: rgb(39, 39, 39);      color: white;  ">
 			<p>{{ summary }}</p>
 		</div>
-		<div class="modal-footer">
+		<div class="modal-footer"  style="background-color: rgb(24, 24, 24);     color: white;  ">
 			<button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
 		</div>
 	`,
@@ -64,6 +64,17 @@ export class MainComponent {
   public getUser() {
     return this._authenticationService.currentUserObject()?.user.username;
   }
+
+  public page=1;
+  public pageSize = 10;
+  selectPage(page: string) {
+		this.page = parseInt(page, 10) || 1;
+	}
+
+	formatInput(input: HTMLInputElement) {
+    const FILTER_PAG_REGEX = /[^0-9]/g;
+		input.value = input.value.replace(FILTER_PAG_REGEX, '');
+	}
 
   changeSelected(i:number, b: boolean) {
     this.movie_list[i].selected = b;

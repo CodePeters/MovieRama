@@ -35,8 +35,8 @@
                             </span>
                         </div>
                         <div style="margin-top:-30px; margin-left: auto;" >
-                              <button class="btn btn-lg btn-outline-primary" matTooltip="This functionality gathers the Movie title and tries to provide a summary of the movie. The more precise the title the better the answer!" 
-                              style="color: white" (click)="open(movie)">
+                              <button class="btn btn-lg btn-outline-primary" style="border-color: rgb(39, 39, 39) !important;" matTooltip="This functionality gathers the Movie title and tries to provide a summary of the movie. The more precise the title the better the answer!" 
+                              style="color: white" (click)="open(movie)" [disabled]="movie.loading">
                                 <mat-icon style="margin-bottom: -4px;">live_help</mat-icon>
                                 Ask AI
                               </button>
@@ -71,6 +71,34 @@
             @empty {
                 <li>There are no items.</li>
             }
+            <div class="paginator">
+                <ngb-pagination [collectionSize]="70" [(page)]="page" >
+                    <ng-template ngbPaginationPages let-page let-pages="pages">
+                        <!-- @if (pages.length > 0) { -->
+                            <li class="ngb-custom-pages-item" >
+                                <div class="mb-3 d-flex flex-nowrap px-2">
+                                    <label id="paginationInputLabel" for="paginationInput" class="col-form-label me-2 ms-1">Page</label>
+                                    <input
+                                        #i
+                                        type="text"
+                                        inputmode="numeric"
+                                        pattern="[0-9]*"
+                                        class="form-control custom-pages-input"
+                                        id="paginationInput"
+                                        [value]="page"
+                                        (keyup.enter)="selectPage(i.value)"
+                                        (blur)="selectPage(i.value)"
+                                        (input)="formatInput($any($event).target)"
+                                        aria-labelledby="paginationInputLabel paginationDescription"
+                                        style="width: 2.5rem; background-color: rgba(255, 255, 255, 0.25);"
+                                    />
+                                    <span id="paginationDescription" class="col-form-label text-nowrap px-2"> of {{ 100 }}</span>
+                                </div>
+                            </li>
+                        <!-- } -->
+                    </ng-template>
+                </ngb-pagination>
+            </div>
         </mat-list>
     </div>
 </div>

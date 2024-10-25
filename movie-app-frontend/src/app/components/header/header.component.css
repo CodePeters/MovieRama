@@ -6,7 +6,7 @@
 }
 
 ::ng-deep .customize {
-    background: rgba(0, 56, 56, 0.85) !important;
+    background: rgba(17, 131, 131, 0.331) !important;
 }
 
 #icon-button{
@@ -51,7 +51,8 @@
   display: flex; 
   align-items: center; 
   justify-content: center;
-  background-color: #029191;
+  background-color: #003737;
+  background-color: #002422;
 }
 
 .buttons{
