@@ -21,7 +21,7 @@ export class MovieService {
     if(ordering !== undefined)
       params.set('ordering', ordering);
     if(search_text !== undefined)
-      params.set('search_text', search_text);
+      params.set('search', search_text);
 
     url = `${url}&${params.toString()}`;
     return this._requestHelper.get(url);
