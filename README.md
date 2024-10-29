@@ -24,25 +24,40 @@ After git clone `cd` to the cloned repo: `cd ./MovieRama`
 - `python manage.py migrate`
 - `python manage.py createsuperuser --username admin --email <sample_email_here>`
 
-* At this point we continue with ElasticSearch setup (within `./MovieRama-backend` diresctory. If you wish to skip this step, you can but once testing the app using the search bar will lead to errors (so you can skip using the search bar functionality).
+* At this point we continue with ElasticSearch setup (within `./MovieRama-backend` diresctory.
 * Instructions for elasticsearch installation are here: https://www.elastic.co/guide/en/elasticsearch/reference/8.11/targz.html but for mac OS in short you can follow:
 - `curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.11.4-darwin-x86_64.tar.gz`
-- `url https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.11.4-darwin-x86_64.tar.gz.sha512 | shasum -a 512 -c -`
+- `curl https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.11.4-darwin-x86_64.tar.gz.sha512 | shasum -a 512 -c -`
 - `tar -xzf elasticsearch-8.11.4-darwin-x86_64.tar.gz`
--
--  In a new term again to our backend base dir(MovieRama-backend) and from there go to the newly created Elasticsearch dir `cd ./elasticsearch-8.11.4/` and run Elastic: `./bin/elasticsearch` , Once done this will see a password that Elasticsearch generates, export this to:
--  `export ELASTIC_PASSWORD="your_password"`
--  `export ES_HOME="YOUR_BASE_PATH_TO_CLONED_REPO/MovieRama/MovieRama-backend/elasticsearch-8.11.4"`
--  Verify installation is correct by running `curl --cacert $ES_HOME/config/certs/http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200` this should produce a json with Elasticsearch conf info.
 
-We are almost there!: 
+- In a new term again to our backend base dir(MovieRama-backend) and from there go to the newly created Elasticsearch dir `cd ./elasticsearch-8.11.4/` and run Elastic: `./bin/elasticsearch` , Once done this will see a password that Elasticsearch generates, export this to:
+
+ in new term window:
+- `export ELASTIC_PASSWORD="your_password"`
+- `export ES_HOME="YOUR_BASE_PATH_TO_CLONED_REPO/MovieRama-backend/elasticsearch-8.11.4"`
+- Verify installation is correct by running: `curl --cacert $ES_HOME/config/certs/http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200` this should produce a json with Elasticsearch conf info.
+- Now for Django to use elasticsearch edit the settings file in: 
+
+```
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'https://localhost:9200',
+        "http_auth": ("elastic", "YOUR_ELASTICSEARC_GENERATED_PASSWORD"),
+        "ca_certs": "Place the PATH from the command: echo $ES_HOME/config/certs/http_ca.crt, for exmple mine is: /Users/georgepetrou/Desktop/MovieRama/MovieRama-backend/elasticsearch-8.11.4/config/certs/http_ca.crt",
+    },
+}
+```
+
+We are almost there!:  
+
+In our first terminal where we left it, run:
 
 - `python manage.py search_index --rebuild`
 - `python manage.py runserver`
 
 Now the backend should be up and running!
 
-* Build Frontend:
+* Build Frontend, in a nw term, in cloned folder:
 - `cd ../movie-app-frontend`
 - `npm install`
 - `ng serve`
