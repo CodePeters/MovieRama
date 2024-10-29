@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +9,7 @@ import { Movie } from '../../shared/movie.model';
 import { ReviewService } from '../../services/review.service';
 import { ReviewPayload } from '../../shared/review_submit.model';
 import { MovieService } from '../../services/movie.service';
-import { Sort} from '@angular/material/sort';
+import { Sort, MatSort, MatSortable} from '@angular/material/sort';
 import { Observable } from "rxjs";
 
 
@@ -25,6 +25,18 @@ export class ProfileComponent {
   // public currentUser$: Observable<User | null>;
   public userobj: User|null;
   public currentUser$: Observable<User | null>;
+  public page = 1;
+  public pageSize = 10;
+  public totalMovies = 0;
+  public totalPages = 0;
+
+  @ViewChild(MatSort, {static:false}) sort!: MatSort;
+
+  ngAfterViewInit(){
+    console.log(this.sort);
+    this.sort.sort(({ id: 'date', start: 'asc'}) as MatSortable);
+
+  }
 
   constructor(
     private readonly _profileService: ProfileService,
@@ -32,7 +44,9 @@ export class ProfileComponent {
     private readonly _router: Router,
     private readonly _activatedRoute: ActivatedRoute,
     private readonly _reviewService: ReviewService,
-    private readonly _movieService: MovieService
+    private readonly _movieService: MovieService,
+    private router: Router,
+
   ){
     this.username = _activatedRoute.snapshot.paramMap.get('username') || '' ;
     this.getProfileMovies();
@@ -48,10 +62,6 @@ export class ProfileComponent {
     console.log( this.userobj);
   }
 
-  public getUser() {
-    return this._authenticationService.currentUserObject()?.user.username;
-  }
-
   private _subscribeToUserChanges(): void {
     this.currentUser$.subscribe((user: User | null) => this.userobj = user)
   }
@@ -63,11 +73,60 @@ export class ProfileComponent {
     return false;
   }
 
+  public getUser() {
+    return this._authenticationService.currentUserObject()?.user.username;
+  }
+
+  selectPage(page: string) {
+		this.page = parseInt(page, 10) || 1;
+    if(this.page > this.totalPages) this.page = this.totalPages;
+    this.getProfileMovies();
+	}
+
+	formatInput(input: HTMLInputElement) {
+    const FILTER_PAG_REGEX = /[^0-9]/g;
+		input.value = input.value.replace(FILTER_PAG_REGEX, '');
+	}
+
+  public ordering: string | undefined = 'date';
+
+  sortData(sort: Sort) {
+    const data = this.movie_list.slice();
+    if (!sort.active || sort.direction === '') {
+      this.movie_list = data;
+      this.ordering = undefined;
+      return;
+    }
+
+
+    switch (sort.active) {
+      case 'likes':
+        console.log('here')
+        this.ordering = 'likes';
+        break;
+      case 'hates':
+        this.ordering = 'hates';
+        break;
+      case 'date':
+        this.ordering = 'date';
+        break;
+      default:
+        this.ordering = undefined;
+    }
+    if(sort.direction !== 'asc')
+      this.ordering = `-${this.ordering}`;
+    this.page = 1;
+    this.getProfileMovies();
+  }
+
   public getProfileMovies(): void {
 
-    this._profileService.getProfileMovies(this.username || '').subscribe({
-      next: (response: {movie_list:Movie[]} ) => {
+    this._profileService.getProfileMovies(this.username || '', this.page-1, this.pageSize, this.ordering).subscribe({
+      next: (response: {movie_list:Movie[], count: number} ) => {
         // console.log(response)
+        this.movie_list = response.movie_list
+        this.totalMovies = response.count;
+        this.totalPages = Math.ceil(this.totalMovies / this.pageSize);
         this.movie_list = response.movie_list;
       },
       error: (err: HttpErrorResponse) => {
@@ -76,34 +135,10 @@ export class ProfileComponent {
     });
   }
 
-  changeSelected(i:number, b: boolean) {
-    this.movie_list[i].selected = b;
+  public get_profile_link(profile_id: string | undefined){
+    if(profile_id===undefined) return;
+    this.router.navigateByUrl(`/profile/${profile_id}`);
   }
-
-  sortData(sort: Sort) {
-    const data = this.movie_list.slice();
-    if (!sort.active || sort.direction === '') {
-      this.movie_list = data;
-      return;
-    }
-
-    this.movie_list = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'likes':
-          return this.compare(a.likes, b.likes, isAsc);
-        case 'hates':
-          return this.compare(a.hates, b.hates, isAsc);
-        default:
-          return 0;
-      }
-    });
-  }
-
-  public compare(a: number | string, b: number | string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
-
  
 
   public like(movie: Movie){

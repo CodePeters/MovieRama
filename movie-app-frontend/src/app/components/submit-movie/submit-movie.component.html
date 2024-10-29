@@ -1,5 +1,10 @@
 <mat-card>
-    <mat-card-title>Submit movie</mat-card-title>
+    <mat-card-title class="d-flex align-items-center justify-content-center">
+        <mat-icon style="font-size: 22px;" class="material-icons-oulined mx-1">
+            live_tv_outline
+        </mat-icon>
+        Submit movie
+    </mat-card-title>
     <mat-card-content>
         <form [formGroup]="mainForm" (ngSubmit)="submit()">
             <mat-form-field appearance="outline" color="primary">

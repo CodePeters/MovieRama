@@ -27,5 +27,6 @@ export interface ProfileMovies {
 }
 
 export interface MovieResonse {
-    movie_list: Movie[]
+    movie_list: Movie[];
+    count: number;
 }

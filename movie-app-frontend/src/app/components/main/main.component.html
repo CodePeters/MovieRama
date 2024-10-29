@@ -1,6 +1,6 @@
 <div *ngIf="is_authenticated()">
-    <div class="sorting">
-        <table matSort (matSortChange)="sortData($event)">
+    <div class="d-flex align-items-center justify-content-center sorting">
+        <table #mysort matSort (matSortChange)="sortData($event)">
             <tr>
                 <button mat-button style="color:whitesmoke;">
                     <th mat-sort-header="likes">Sort by Likes</th>
@@ -8,41 +8,66 @@
                 <button mat-button  style="color:whitesmoke;">
                     <th mat-sort-header="hates">Sort by Hates </th>
                 </button>
+                <button mat-button  style="color:whitesmoke;">
+                    <th mat-sort-header="date" matSortActive="true" matSortDirection="asc">Sort by Date </th>
+                </button>
             </tr>
         </table>
+        <div class="col-xs-2 mx-1">
+            <div class="input-group col-xs-2 mx-1">
+                <input style="background-color: #25282c; color:whitesmoke;" class="form-control form-control-sm" 
+                    type="text" placeholder="search text" aria-label="search input" [(ngModel)]="search_text">  
+                <div class="input-group-append">
+                    <button [hidden]="!search_text" matSuffix mat-button (click)="resetText()" id="'button"
+                        style="margin-left: -28px; width: 28px; height: 28px; min-width: unset!important; padding: 0px 0px;">
+                        <mat-icon style="margin-left: 4px;">
+                            close
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button matSuffix mat-mini-fab aria-label="Search" 
+            style="height: 31px; width: 32px; margin-left: 1px; 
+            border-top-left-radius: 0px;  border-bottom-left-radius: 0px;
+            border-top-right-radius:7px;  border-bottom-right-radius: 7px;"  (click)="loadMovies()">
+            <mat-icon>search</mat-icon>
+        </button>
     </div>
+    @if(loading){
+        <div class="mt-5  d-flex align-items-center justify-content-center">
+            <mat-spinner diameter="40"></mat-spinner>
+        </div>
+    }
     <div class="list-container">
-        <mat-list class="list-mat" style="height: 65vh;">
+        <mat-list class="list-mat" style="height: 72vh;">
             @for (movie of movie_list; track movie.id; let idx = $index) {
-                <mat-card class="example-card" (mouseenter)="changeSelected(idx, true)" (mouseleave)="changeSelected(idx, false)">
-                    <mat-card-header style=" display: flex; flex-grow: 1; justify-content: center; align-items: center;">
-                        <!-- <mat-chip-option [selected]="movie.selected" color="primary"> -->
-                            <mat-card-title style="padding-bottom: 5px; color:whitesmoke; font-family:Roboto; font-size: 40px;">{{movie.title}}</mat-card-title>
-                        <!-- </mat-chip-option> -->
-                    </mat-card-header>
-                    <mat-card-content class="card-content-1">
-                        <div class="card-content" style="margin-top:-30px" >
-                            <a style = "display: block;  color: white; font-size: 0.8rem;"> 
-                                <i><mat-icon style="font-size:30px; margin-bottom: -2px; margin-right: 2px;">person</mat-icon> </i> 
-                                <b><a class="custom-user" href="profile/{{movie.user?.username}}" >{{movie.user?.username}}
-                                    @if(getUser()===movie.user?.username){
-                                        <a>(you)</a>
-                                    }
-                                </a></b>
-                            </a>
-                            <span class="date-span">
-                               <i>Created on:</i> {{movie.date}}
-                            </span>
-                        </div>
-                        <div style="margin-top:-30px; margin-left: auto;" >
-                              <button class="btn btn-lg btn-outline-primary" style="border-color: rgb(39, 39, 39) !important;" matTooltip="This functionality gathers the Movie title and tries to provide a summary of the movie. The more precise the title the better the answer!" 
+                <mat-card class="example-card">
+                    <mat-card-header   class="card-content-1">
+                        <mat-card-title style="display: flex; align-items: center; color:whitesmoke; font-family: Black Ops One, system-ui;font-size: 30px;">
+                                <button (click)="get_profile_link(movie.user?.username)"
+                                class="btn btn-sm btn-outline-secondary d-flex align-items-center mx-2"
+                                 [matTooltip]="'User: ' + movie.user?.username + (getUser()===movie.user?.username? ' (you)': '')" >
+                                    <mat-icon class="material-icons-oulined">
+                                        person_outline
+                                    </mat-icon>
+                                </button>
+                            {{movie.title}}
+                        </mat-card-title>
+
+                        <div style=" margin-left: auto;" >
+                              <button class="btn btn-sm btn-outline-secondary d-flex align-items-center " style="border-color: rgb(39, 39, 39) !important;" 
+                                matTooltip="This functionality gathers the Movie title and tries to provide a summary of the movie. The more precise the title the better the answer!" 
                               style="color: white" (click)="open(movie)" [disabled]="movie.loading">
-                                <mat-icon style="margin-bottom: -4px;">live_help</mat-icon>
+                                @if(movie.loading){
+                                    <mat-spinner class="mx-1" diameter="20"></mat-spinner>
+                                }@else{
+                                    <mat-icon>live_help</mat-icon>
+                                 }
                                 Ask AI
                               </button>
                         </div>
-
-                    </mat-card-content>
+                    </mat-card-header>
                     <mat-card-header class="custom-card-header">
                         <mat-chip  class="custom-chip">
                             Description
@@ -52,12 +77,12 @@
                         {{movie.description}}
                     </mat-card-content>
                     <mat-card-actions class="card-footer" >
-                        @if(getUser()===movie.user?.username){
-                            <mat-icon style="font-size:20px; margin-bottom: -10px; margin-right: -2px; color:whitesmoke"  matTooltip="You can't vote your own movies">info</mat-icon>
-                        }
-                        @if(movie.loading){<mat-spinner style="margin-bottom: -8px;" diameter="20"></mat-spinner>}
-                        <div style="margin-left: auto;">
-           
+                            <span class="date-span">
+                               <i>Created on:</i> {{movie.date}}
+                            </span>
+                        <div 
+                        [matTooltip]="(getUser()===movie.user?.username)? 'You can\'t vote your own movies' : null"
+                        style="margin-left: auto; margin-right: -4px;">
                             <button  mat-button class="custom-button" (click)="like(movie)" [disabled]="disableLikeButton(movie.user?.username, movie.review)">
                                 <mat-icon style="margin-right:3px;"  [ngStyle]="{'color': getLikeColor(movie.review) }" >thumb_up</mat-icon> {{movie.likes}}
                             </button>
@@ -71,6 +96,33 @@
             @empty {
                 <li>There are no items.</li>
             }
+            <div class="paginator">
+                <ngb-pagination [collectionSize]="totalMovies" [pageSize]="pageSize" [(page)]="page" (pageChange)="loadMovies()">
+                    <ng-template ngbPaginationPages let-page let-pages="pages">
+                        <!-- @if (pages.length > 0) { -->
+                            <li class="ngb-custom-pages-item" >
+                                <div class="mb-3 d-flex flex-nowrap px-2">
+                                    <label style="color: whitesmoke;" id="paginationInputLabel" for="paginationInput" class="col-form-label me-2 ms-1">Page</label>
+                                    <input
+                                        #i
+                                        type="text"
+                                        inputmode="numeric"
+                                        pattern="[0-9]*"
+                                        class="form-control custom-pages-input"
+                                        id="paginationInput"
+                                        [value]="page"
+                                        (keyup.enter)="selectPage(i.value)"
+                                        (blur)="selectPage(i.value)"
+                                        (input)="formatInput($any($event).target)"
+                                        aria-labelledby="paginationInputLabel paginationDescription"
+                                        style="width: 2.5rem; color: whitesmoke;background-color: rgba(255, 255, 255, 0.25);"
+                                    />
+                                    <span id="paginationDescription" style="color: whitesmoke;" class="col-form-label text-nowrap px-2"> of {{ totalPages }}</span>
+                                </div>
+                            </li>
+                    </ng-template>
+                </ngb-pagination>
+            </div>
         </mat-list>
     </div>
 </div>

@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'movies.apps.MoviesConfig',
-     'corsheaders',
+    'corsheaders',
+    'django_elasticsearch_dsl',
+    # 'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -145,5 +147,20 @@ LOGGING = {
         'handlers': ['file'],
         'level': 'INFO',
         'propagate':True
+    },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+
+}
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'https://localhost:9200',
+        "http_auth": ("elastic", "pHQw6f0*pztYt+SbwcwB"),
+        "ca_certs": "/Users/georgepetrou/Desktop/MovieRama/MovieRama-backend/elasticsearch-8.11.4/config/certs/http_ca.crt",
     },
 }

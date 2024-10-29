@@ -1,10 +1,6 @@
 from rest_framework import serializers
 from .models import Movie, Review
-from django.contrib.auth.models import User
 from movierama.serializers import UserSerializer
-from movierama.serializers import UserMinifiedDetailsSerializer
-
-import datetime
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

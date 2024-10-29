@@ -22,13 +22,7 @@
   height: 50px;
   width: 50px;
 }
-
-.logo-container{
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-}
-
+ 
 .logo-container:hover {
   transition-timing-function: ease-in;
   transition: 1.2s;
@@ -48,10 +42,6 @@
 }
 
 #toolbar{
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  /* background-color: #003737; */
   background-color: #002422;
 }
 

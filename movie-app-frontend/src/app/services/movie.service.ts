@@ -12,8 +12,19 @@ export class MovieService {
     private readonly _requestHelper: InterceptorService
   ) { }
 
-  public getMovies(): Observable<MovieResonse> {
-    return this._requestHelper.get('/movies');
+  public getMovies(page: number, pagesize: number, ordering: string | undefined, search_text: string | undefined): Observable<MovieResonse> {
+
+    let offset = page * pagesize;
+    const params = new URLSearchParams()
+    let url = `/movies?offset=${offset}`;
+
+    if(ordering !== undefined)
+      params.set('ordering', ordering);
+    if(search_text !== undefined)
+      params.set('search_text', search_text);
+
+    url = `${url}&${params.toString()}`;
+    return this._requestHelper.get(url);
   }
 
   public submitMovie(payload: MovieFormPayload): Observable<void> {

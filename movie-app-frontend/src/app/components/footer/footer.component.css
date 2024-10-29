@@ -16,7 +16,7 @@ footer{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 8px; 
+  margin: 5px; 
   transition: 1s ease-out; 
 }
 
@@ -25,7 +25,7 @@ footer{
 }
 
 .subFT{
-  height: 10vh !important;
+  height: 8vh !important;
   color: #bbb;
   width: 100%
 }
@@ -33,11 +33,14 @@ footer{
 .sig-by{
   font-style: oblique; 
   color:black;
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-top: -5px;
+  font-size: 12px;
 }
 
 .sig{
-  height: 6vh;  
+  height: 5vh;
+  padding-bottom: 8px;  
 }
 
 .ft-legal {

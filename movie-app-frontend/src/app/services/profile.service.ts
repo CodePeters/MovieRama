@@ -13,8 +13,12 @@ export class ProfileService {
     private readonly _requestHelper: InterceptorService
   ){}
 
-  public getProfileMovies(username: string): Observable<{movie_list:Movie[]}> {
-    return this._requestHelper.get(`/profile/${username}/movies`);
+  public getProfileMovies(username: string, page: number, pagesize: number, ordering: string | undefined): Observable<{movie_list:Movie[], count: number}> {
+    let offset = page * pagesize;
+    let url = `/profile/${username}/movies?offset=${offset}`;
+    if(ordering !== undefined)
+      url = `${url}&ordering=${ordering}`;
+    return this._requestHelper.get(url);
   }
 
 }

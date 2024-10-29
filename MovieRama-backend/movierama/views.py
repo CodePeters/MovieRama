@@ -1,17 +1,17 @@
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.response import Response
-
-from .serializers import UserSerializer, UserMinifiedDetailsSerializer
-from rest_framework import status
-from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
-
-from django.shortcuts import get_object_or_404
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
 
-from rest_framework import permissions, viewsets
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+
+from .serializers import UserSerializer, UserMinifiedDetailsSerializer
+
 import logging
+
 logger = logging.getLogger(__name__)
 
 @api_view(['POST'])
@@ -63,11 +63,3 @@ def fetch_profile_info(request, user_id):
 	user = get_object_or_404(User, id=user_id)
 	serializer = UserMinifiedDetailsSerializer(instance=user)
 	return Response(serializer.data)
-
-
-@authentication_classes([SessionAuthentication, TokenAuthentication])
-@permission_classes([IsAuthenticated])
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]

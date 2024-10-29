@@ -1,3 +1,31 @@
+.custom-user-data{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: antiquewhite;
+    margin: 10px 0px -20px 0px;
+}
+
+.user-data-container{
+    display: flex; 
+    background-color: rgb(12, 12, 12);
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(39, 39, 39);
+    color: whitesmoke;
+    border-radius: 14px;
+    padding:8px 25px 0px 25px;
+}
+
+.user-movies{
+    margin-bottom: -25px;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    color: antiquewhite;
+}
+
 :host {
     background-blend-mode: lighten;
     mask-image: linear-gradient(rgb(0, 0, 0) 97%, transparent);
@@ -7,19 +35,14 @@
 
 .example-card {
     width: 80vh;
-    min-height:20vh;
+    min-height:30vh;
     padding: 10px 10px;
-    margin-bottom: 10px;
-    /* mask-image: linear-gradient(rgb(0, 0, 0) 98%, transparent);
-    background: radial-gradient(circle at 95% 10%, #00cef2, transparent 40%),
-        radial-gradient(circle at 45% 10%, #9100f294, transparent 50%), radial-gradient(circle at 55% 85%, #ffffffac, transparent 40%),
-        radial-gradient(circle at 5% 5%, #00e9b3bb, transparent 40%), linear-gradient(65deg, #602cfe, rgb(23, 105, 187) 50%); */
+    margin-bottom: 15px;
     background-color: rgb(12, 12, 12);
     border: solid;
     border-radius: 15px;
     border-color: rgb(39, 39, 39);
     border-width: 1px;
-
 }
 
 .example-card:hover{
@@ -49,48 +72,41 @@
     padding: 5px 5px;
 }
 
+.paginator{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    height: 2%;
+    padding: 5px 5px;
+}
+
 .list-container{
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 70%;
-    flex-grow: 1;
+    height: 50%;
     overflow: auto; 
 }
-
-.card-content{
-    padding: 10px 10px;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 1rem;
-    border: double;
-    border-radius: 20px;
-    border-width: 3px;
-    border-color:rgb(39, 39, 39);
-}
-
-
 
 .custom-chip{
     background-color: rgb(27, 26, 26) !important;
     height: 2.2vh;
 }
 
-
 .custom-card-content{
     flex-grow: 1; 
     overflow: auto; 
     border-radius: 14px;
     padding-top: 12px;
-    min-height: 12vh;
-    /* background-color: rgba(12, 142, 149, 0.404);  */
+    min-height: 18vh;
     background-color: rgb(39, 39, 39);   
     color: white; 
     mask-image: linear-gradient(rgb(0, 0, 0) 98%, transparent);
 }
-
 
 .custom-card-header{
     margin-bottom: -10px; 
@@ -102,15 +118,40 @@
 }
 
 .custom-button{
-    width: 57px!important;
+    width: 40px!important;
     min-width: unset!important;
+    padding: 0px 0px;
 }
 
+.btn-circle.btn-sm { 
+    width: 60px; 
+    height: 60px; 
+    padding: 8px 14px; 
+    border-radius: 35px; 
+    font-size: 12px; 
+    text-align: center; 
+} 
+
 .card-content-1{
-    display: block;
+    padding: 0px 0px;
+    margin: 2px 0px 20px 2px;
+    display: flex;
+    align-items: center;
     position: relative;
     font-weight: 300;
 }
+
+.card-content{
+    padding: 7px 7px;
+    /* display: inline-block; */
+    /* vertical-align: middle; */
+    line-height: 1rem;
+    border: double;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color:rgb(39, 39, 39);
+}
+
 .date-span{
     margin-top:5px; 
     color: #bbb; 
@@ -123,42 +164,6 @@
     margin-left: 2px;
 }
 
-.custom-user-data{
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: antiquewhite;
-    margin-top: 5px;
-}
-
-.user-data-content{
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center; color: antiquewhite; margin: 0px 0px;
-}
-
-.user-data-container{
-    display: flex; 
-    justify-content: center; 
-    background-color: rgb(12, 12, 12);
-
-    align-items: center; width: 80vh;
-    display: flex; 
-    border: solid;
-    border-width: 2px;
-    border-color: rgb(39, 39, 39);
-    color: whitesmoke;
-    border-radius: 14px;
-    padding-top:8px;
-}
-
-.user-movies{
-    margin-bottom: -10px;
-    margin-top: 5px;  
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
-    color: antiquewhite;
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+    background-color:  rgba(255, 255, 255, 0.25)!important;
 }

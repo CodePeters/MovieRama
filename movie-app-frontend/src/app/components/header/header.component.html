@@ -1,4 +1,4 @@
-<mat-toolbar id="toolbar">
+<mat-toolbar id="toolbar" class="d-flex align-items-center justify-content-center">
   <button mat-icon-button id="icon-button" [matMenuTriggerFor]="menu" aria-label="icon-button">
     <mat-icon>menu</mat-icon>
   </button>
@@ -27,7 +27,7 @@
       </button>
     }
   </mat-menu>
-  <div class="logo-container">
+  <div class="logo-container d-flex align-items-center justify-content-center">
     <span>
       <img @flyInOut src="logo.png" id="logo" alt="My image" loading="lazy">
     </span>
