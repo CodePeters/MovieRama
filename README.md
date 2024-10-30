@@ -3,10 +3,10 @@ A Movie Platform (2024)
 
 ## _Tech Stack_ 
 
-* Python
+* Python3
 * Django & Django-Rest Framework  
 * Django jwt Auth
-* SQLite3
+* SQLite
 * Angular 18
 * Angular Material, Ng-Bootsrap
 * Cloudflare worker (serverless)
@@ -36,6 +36,8 @@ After git clone `cd` to the cloned repo: `cd ./MovieRama`
 - `export ELASTIC_PASSWORD="your_password"`
 - `export ES_HOME="YOUR_BASE_PATH_TO_CLONED_REPO/MovieRama-backend/elasticsearch-8.11.4"`
 - Verify installation is correct by running: `curl --cacert $ES_HOME/config/certs/http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200` this should produce a json with Elasticsearch conf info.
+
+  
 - Now for Django to use elasticsearch edit the settings file in: 
 
 ```
@@ -49,7 +51,6 @@ ELASTICSEARCH_DSL={
 ```
 
 We are almost there!:  
-
 In our first terminal where we left it, run:
 
 - `python manage.py search_index --rebuild`
@@ -65,19 +66,8 @@ Now the backend should be up and running!
 Everything at this point should is up and running !!!
 App is served in `http://localhost:4200/`
 
-The project also uses a serveless component for a feature, that is deployed in cloudflare and the worker code in in wrangler project folder, no setup is required.
-
-Logs are generated in `./MovieRama-backend` folder.
-
-
-Due to luck of time this project does not include:
-- ~~Sorting requirement is covered in frontend which we know is not ideal (but simpler)~~ (Done!)
-- ~~Pagination would be nice to have (ideally woulbe be done on the backend and requires frontend handling as well)~~ (Done!)
-- Unit tests
-- Comments in code and documentation
-- scaled db (not just an sqlite)
- ... as you can see the list of improvements is not exhaustive 🙂
-Just mentioning those as in a real production project these would not be best practises if the app was scaling.
 ##
 
-### I have also included a png file  (`Scalable_System_design`) with an 'ideal' scalable system design architecture using serverless architecture, also in `ScalableSystem_Explanation` you will find some explanation about teh architecture design.
+The project also uses a serveless component for a feature, that is deployed in cloudflare and the worker code in in wrangler project folder, no setup is required. Also, as a best practise for scaling, sorting is done in the backend and we also have pagination for our endpoints. I also have added logging and Logs are generated inside  `./MovieRama-backend` folder.
+
+### I have also included a png file  (`Scalable_System_design`) with an 'ideal' scalable system design architecture using serverless architecture, also in `ScalableSystem_Explanation` you will find some explanation about the architecture design.
