@@ -30,7 +30,7 @@ After git clone `cd` to the cloned repo: `cd ./MovieRama`
 - `curl https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.11.4-darwin-x86_64.tar.gz.sha512 | shasum -a 512 -c -`
 - `tar -xzf elasticsearch-8.11.4-darwin-x86_64.tar.gz`
 
-- In a new term again to our backend base dir(MovieRama-backend) and from there go to the newly created Elasticsearch dir `cd ./elasticsearch-8.11.4/` and run Elastic: `./bin/elasticsearch` , Once done this will see a password that Elasticsearch generates, export this to:
+- In a new term again to our backend base dir(MovieRama-backend) and from there go to the newly created Elasticsearch dir `cd ./elasticsearch-8.11.4/` and run Elastic: `./bin/elasticsearch` , Once done you will see a password that Elasticsearch generates, export this to:
 
  in new term window:
 - `export ELASTIC_PASSWORD="your_password"`
@@ -38,7 +38,7 @@ After git clone `cd` to the cloned repo: `cd ./MovieRama`
 - Verify installation is correct by running: `curl --cacert $ES_HOME/config/certs/http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200` this should produce a json with Elasticsearch conf info.
 
   
-- Now for Django to use elasticsearch edit the settings file in: 
+- Now for Django to use elasticsearch edit the settings file in: `MovieRama-backend/movierama/settings.py` (line 160)
 
 ```
 ELASTICSEARCH_DSL={
