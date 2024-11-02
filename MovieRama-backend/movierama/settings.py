@@ -160,7 +160,7 @@ REST_FRAMEWORK = {
 ELASTICSEARCH_DSL={
     'default': {
         'hosts': 'https://localhost:9200',
-        "http_auth": ("elastic", "pHQw6f0*pztYt+SbwcwB"),
-        "ca_certs": "/Users/georgepetrou/Desktop/MovieRama/MovieRama-backend/elasticsearch-8.11.4/config/certs/http_ca.crt",
+        "http_auth": ("elastic", "Ts=FfSsA2sQV_WbbKY3I"),
+        "ca_certs": str(BASE_DIR) + "/../elasticsearch-8.11.4/config/certs/http_ca.crt",
     },
 }
