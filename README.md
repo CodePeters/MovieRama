@@ -36,14 +36,12 @@ Open another terminal and run:
 - `python manage.py search_index --rebuild`
 - `python manage.py runserver`
 
-Now the backend should be up and running!
+Now the backend should be up and running!, For the Frontend, in a new term:
 
-* For the Frontend, in a new term:
 - `cd ../movie-app-frontend`
 - `ng serve`
 
-Everything at this point should is up and running !!!
-App is served in `http://localhost:4200/`
+Everything at this point should is up and running! App is served in `http://localhost:4200/`
 
 ##
 
