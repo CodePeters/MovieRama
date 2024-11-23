@@ -17,7 +17,7 @@ export class AiService {
     if(renew){
       params.set('renew', 'true');
     }
-    let url = 'https://crimson-lab-b155-123abcd-24543eq3s-234awq2.georgepetrou08.workers.dev/';
+    let url = 'endpoint_url_here';
     return this._requestHelper.get_with_provided_url(`${url}?${params.toString()}`);
   }
 
