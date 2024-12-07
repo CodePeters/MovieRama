@@ -44,9 +44,3 @@ Now the backend should be up and running!, For the Frontend, in a new term:
 Everything at this point should is up and running! App is served in `http://localhost:4200/`
 
 ##
-
-We have implemented pagination to our endpoints which is a good practise for large scale data, and of course ordering in done on the backend.
-
-The project also uses a serveless component for a feature, that is deployed in cloudflare and the worker code in in wrangler project folder, no setup is required. Also, as a best practise for scaling, sorting is done in the backend and we also have pagination for our endpoints. I also have added logging and Logs are generated inside  `./MovieRama-backend` folder.
-
-### I have also included a png file  (`Scalable_System_design`) with an 'ideal' scalable system design architecture using serverless architecture, also in `ScalableSystem_Explanation` you will find some explanation about the architecture design.
